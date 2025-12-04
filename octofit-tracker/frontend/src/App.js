@@ -1,9 +1,19 @@
 
+
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ActivityTable from './ActivityTable';
+import TeamCard from './TeamCard';
+import LeaderboardTable from './LeaderboardTable';
+import WorkoutForm from './WorkoutForm';
+import ModalDialog from './ModalDialog';
 
 function App() {
+  // Demo modal state
+  const [showModal, setShowModal] = React.useState(false);
+
   return (
     <div className="App bg-light min-vh-100">
       {/* Bootstrap Navigation */}
@@ -38,31 +48,27 @@ function App() {
         </div>
       </nav>
 
-      {/* Main Content Card */}
+      {/* Main Content */}
       <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-8">
-            <div className="card shadow mb-4">
-              <div className="card-body text-center">
-                <img src={logo} className="App-logo mb-3" alt="logo" />
-                <h1 className="card-title display-5 mb-3">Welcome to OctoFit Tracker</h1>
-                <p className="card-text lead mb-4">
-                  OctoFit Tracker is running with <span className="fw-bold">Bootstrap</span>!<br />
-                  Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                  className="btn btn-primary btn-lg"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn React
-                </a>
-              </div>
-            </div>
+        <div className="row">
+          <div className="col-md-6">
+            <ActivityTable />
+            <TeamCard />
+          </div>
+          <div className="col-md-6">
+            <LeaderboardTable />
+            <WorkoutForm />
+            <button className="btn btn-info mt-3" onClick={() => setShowModal(true)}>
+              Show Modal Example
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Modal Example */}
+      <ModalDialog show={showModal} onClose={() => setShowModal(false)} title="Bootstrap Modal">
+        <p>This is a Bootstrap-styled modal dialog example.</p>
+      </ModalDialog>
     </div>
   );
 }
